@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content"
+import PageLayout from "@layouts/PageLayout.astro"
+import TopLayout from "@layouts/TopLayout.astro"
+import BottomLayout from "@layouts/BottomLayout.astro"
+import Blog from "@components/Blog"
+import { BLOG } from "@consts"
+
+const posts = (await getCollection("blog"))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+
+const tags = [...new Set(posts.flatMap(post => post.data.tags))]
+  .sort((a, b) => a.localeCompare(b))
+---
+
+<PageLayout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
+  <TopLayout>
+    <div class="animate page-heading">
+      {BLOG.TITLE}
+    </div>
+    <div class="animate">
+      <br>
+      <p>Bienvenue sur la partie dédié à la veille technologique ! Ici, je partage les dernières actualités, tendances et innovations dans le monde de la technologie.</p>
+     <br>
+     <p>J'utilise <a href="https://feedly.com/i/collection/content/user/a2a3c08a-fab3-4316-a19e-251c7ea9eeb3/category/global.all" style="color: blue; text-decoration: underline;">Feedly</a>, une plateforme de veille technologique, pour suivre de près le développement web, la cybersécurité, l'intelligence artificielle, le cloud computing, et bien d'autres sujets passionnants. Avec Feedly, j'explore une variété de sources d'information pour fournir des contenus pertinents et à jour.</p>
+     <img src="https://raw.githubusercontent.com/SMaitriya/Portfolio/main/public/images/veuille.png" alt="Image de veille technologique">
+     <br><br>
+
+    <p>En fonction des thématiques, je partage également d'autres sites de veille technologique :</p>
+    
+    </div>
+  </TopLayout>
+  <BottomLayout>
+    <div class="animate">
+      <Blog client:load tags={tags} data={posts} />
+    </div>
+  </BottomLayout>
+</PageLayout>

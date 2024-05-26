@@ -1,0 +1,261 @@
+---
+import { getCollection } from "astro:content"
+import PageLayout from "@layouts/PageLayout.astro"
+import ArrowCard from "@components/ArrowCard"
+import StackCard from "@components/StackCard.astro"
+import { SITE, SOCIALS } from "@consts"
+
+const posts = (await getCollection("blog"))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0,3)
+
+const projects = (await getCollection("projects"))
+  .filter(project => !project.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0,3)
+
+  const stacks = [
+    {
+    text: "Javascript", 
+    icon: "javascript", 
+    href: "https://www.javascript.com" 
+
+    },
+
+    {
+      icon: "laravel",
+
+    },
+
+    {
+      icon: "html",
+
+    }
+  ]
+
+const stack = [
+  { 
+    text: "Astro", 
+    icon: "astro", 
+    href: "https://astro.build" 
+  },
+  { 
+    text: "Javascript", 
+    icon: "javascript", 
+    href: "https://www.javascript.com" 
+  },
+  { 
+    text: "Typescript", 
+    icon: "typescript", 
+    href: "https://www.typescriptlang.org" 
+  },
+  { 
+    text: "Tailwind", 
+    icon: "tailwind", 
+    href: "https://tailwindcss.com" 
+  },
+]
+---
+
+<PageLayout title="Home" description={SITE.DESCRIPTION}>
+
+  <!-- Light Mode: Particles -->
+  <div class='absolute inset-0 block dark:hidden'>
+    <div id='particles1' class='fixed inset-0'></div>
+    <div id='particles2' class='fixed inset-0'></div>
+    <div id='particles3' class='fixed inset-0'></div>
+  </div>
+
+  <!-- Dark Theme: Stars -->
+  <div class='absolute inset-0 bg-black hidden dark:block'>
+    <div id='stars1' class='fixed inset-0'></div>
+    <div id='stars2' class='fixed inset-0'></div>
+    <div id='stars3' class='fixed inset-0'></div>
+  </div>
+
+  <script is:inline src="/js/bg.js"></script>
+  
+  <!-- HERO -->
+  <section class="relative h-screen w-full">
+    <div id="planetcont" class='animate absolute inset-0 top-1/4 overflow-hidden'>
+      <div id="crescent" class='absolute top-0 left-1/2 -translate-x-1/2 w-[250vw] min-h-[100vh] aspect-square rounded-full p-[1px] bg-gradient-to-b from-black/25 dark:from-white/75 from-0% to-transparent to-5%'>
+        <div id="planet" class='w-full h-full bg-white dark:bg-black rounded-full p-[1px] overflow-hidden flex justify-center'>
+          <div id="blur" class='w-full h-20 rounded-full bg-neutral-900/25 dark:bg-white/25 blur-3xl'/>
+        </div>
+      </div>
+    </div>
+    <div class="animate absolute h-full w-full flex items-center justify-center">
+      <div class='relative w-full h-full flex items-center justify-center'>
+        <div class='p-5 text-center'>
+          <p class='animated text-lg md:text-xl lg:text-2xl font-semibold opacity-75'>
+            Bonjour, je suis Sramaner Maitriya
+          </p>
+          <p class='animated text-2xl md:text-3xl lg:text-4xl font-bold uppercase text-black dark:text-white'>
+            Développeur web
+          </p>
+          <p class='animated text-sm md:text-base lg:text-lg opacity-75'>
+            En recherche d'une alternance en développement web pour septembre 2024
+          </p>
+          <div id="ctaButtons" class='animated flex flex-wrap gap-4 justify-center mt-5'>
+            <a href='/images/Alternance.pdf' download class='py-2 px-4 rounded truncate text-xs md:text-sm lg:text-base bg-black dark:bg-white text-white dark:text-black hover:opacity-75 blend'>
+              Mon CV
+            </a>
+            <a href="https://github.com/SMaitriya" target="_blank" class='py-2 px-4 truncate rounded text-xs md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend'>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="relative bg-white dark:bg-black">
+    <div class="mx-auto max-w-screen-sm p-5 space-y-24 pb-16">
+
+      <!-- About Section -->
+<section class="animate">
+  <article>
+      <h2>À propos de moi</h2>
+      <p>Bienvenue sur mon portfolio ! Je suis Sramaner Mairiya, étudiant en BTS SIO option SLAM et passionné par le développement web. Après avoir obtenu une licence en Langues Étrangères Appliquées (LEA) à Sorbonne Université, j'ai découvert ma véritable vocation pour l'informatique lors d'un voyage au Népal, où des passionnés m'ont inspiré à explorer ce domaine créatif et dynamique.</p>
+      
+      <p>De retour en France, j'ai entrepris des études autodidactes avant de m'inscrire au BTS Services Informatiques aux Organisations (SIO) au GRETA. Cette formation m'a permis de développer mes compétences en langages de programmation comme C#, PHP, et Python, ainsi qu'en frameworks comme Laravel.</p>
+      
+      <p>Pendant mes études, j'ai réalisé deux stages enrichissants :</p>
+      <ul>
+          <li><strong>Développement WordPress :</strong> J'ai acquis une solide expérience en travaillant sur des projets WordPress, améliorant ainsi mes compétences en CMS et en gestion de contenu.</li>
+          <li><strong>Création d'une Marketplace en React et Laravel :</strong> J'ai développé une marketplace complète de manière autonome, combinant mes compétences en frontend et backend, et surmontant divers défis techniques.</li>
+      </ul>
+      
+      <p>Grâce à ces expériences, j'ai réussi à me classer deuxième de ma promotion avec une moyenne de 16/20.</p>
+      <p>À la rentrée prochaine, je vais intégrer la licence professionnelle en alternance à Sorbonne Université. Cette nouvelle étape me permettra de continuer à développer mes compétences tout en acquérant une expérience professionnelle précieuse.</p>
+      <p>Mon objectif est de devenir un développeur Web Fullstack compétent et polyvalent, avec l'ambition de travailler à l'international. Je crois fermement que mes compétences linguistiques et culturelles, combinées à mes compétences techniques, me permettront de me démarquer dans ma carrière professionnelle.</p>
+      
+      <p>Explorez mon portfolio pour en savoir plus sur mes projets et compétences. N'hésitez pas à me contacter pour toute opportunité ou collaboration !</p>
+  </article>
+
+<!-- Compétences -->
+<section class="animate" style="padding: 40px;">
+  <div style="text-align: center;">
+    <h1 style="font-weight: bold; font-size: 40px; margin-bottom: 40px;">Mes compétences</h1>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px;">
+      <!-- HTML5 icon -->
+      <div style="text-align: center;">
+        <h2 style="font-size: 18px;">HTML5</h2>
+        <img width="100" height="50" src="https://img.icons8.com/color/480/html-5--v1.png" alt="HTML5" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"/>
+      </div>
+      <!-- CSS3 icon -->
+      <div style="text-align: center;">
+        <h2 style="font-size: 18px;">CSS3</h2>
+        <img width="100" height="50" src="https://img.icons8.com/stickers/100/css3.png" alt="CSS3" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"/>
+      </div>
+      <!-- JavaScript icon -->
+      <div style="text-align: center;">
+        <h2 style="font-size: 18px;">JavaScript</h2>
+        <img width="100" height="50" src="https://img.icons8.com/fluency/240/javascript.png" alt="JavaScript" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"/>
+      </div>
+      <!-- PHP icon -->
+      <div style="text-align: center;">
+        <h2 style="font-size: 18px;">PHP</h2>
+        <img width="100" height="50" src="https://img.icons8.com/offices/480/php-logo.png" alt="PHP" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"/>
+      </div>
+      <!-- C# icon -->
+      <div style="text-align: center;">
+        <h2 style="font-size: 18px;">C#</h2>
+        <img width="100" height="50" src="https://img.icons8.com/color/480/c-sharp-logo-2.png" alt="C#" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"/>
+      </div>
+      <!-- PYTHON icon -->
+      <div style="text-align: center;">
+        <h2 style="font-size: 18px;">PYTHON</h2>
+        <img width="100" height="50" src="https://img.icons8.com/color/480/python--v1.png" alt="python--v1" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"/>
+      </div>
+      <!-- Laravel icon -->
+      <div style="text-align: center;">
+        <h2 style="font-size: 18px;">Laravel</h2>
+        <img width="100" height="50" src="https://img.icons8.com/nolan/64/laravel.png" alt="Laravel" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"/>
+      </div>
+      <!-- React icon -->
+      <div style="text-align: center;">
+        <h2 style="font-size: 18px;">React</h2>
+        <img width="100" height="50" src="https://img.icons8.com/officexs/480/react.png" alt="React" style="transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"/>
+      </div>
+    </div>
+  </div>
+</section>
+</section>
+
+
+
+
+     
+ 
+
+      <!-- Project Preview Section -->
+      <section class="animate">
+        <div class="space-y-4">
+          <div class="flex justify-between">
+            <p class="font-semibold text-black dark:text-white">
+              Projets récent
+            </p>
+            <a href="/projects" class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
+              <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
+                Tous les projets
+              </span>
+            </a>
+          </div>
+          <ul class="space-y-4">
+            {projects.map((project) => (
+              <li>
+                <ArrowCard entry={project} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="animate">
+        <div>
+          <p class="font-semibold text-black dark:text-white">
+            Contact
+          </p>
+        
+          <div class="grid grid-cols-4 gap-y-2 mt-4 auto-cols-min">
+            {SOCIALS.map(social => (
+              <div class="col-span-1 flex items-center gap-1">
+                <span class="whitespace-nowrap truncate">
+                  {social.NAME}
+                </span>
+              </div>
+              <div class="col-span-3 truncate">
+                <a href={social.HREF} target="_blank" class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
+                  <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
+                    {social.TEXT}
+                  </span>
+                </a>
+              </div>
+            ))}
+        </div>
+      </section>
+           <!-- Tech Stack Section -->
+           <section class="animate">
+            <div class="space-y-4">
+              <p class="font-semibold text-black dark:text-white">
+                Site construit avec
+              </p>
+              <div class="flex flex-wrap items-center gap-2 mt-5">
+                {stack.map(item => (
+                  <StackCard 
+                    text={item.text}
+                    icon={item.icon}
+                    href={item.href}
+                  />
+                ))}
+              </div>
+            
+    </div>
+  </div>
+
+
+  
+</PageLayout>
